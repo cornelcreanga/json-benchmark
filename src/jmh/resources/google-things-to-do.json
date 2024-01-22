@@ -1,0 +1,343 @@
+{
+  "feed_metadata": {
+    "shard_id": 0,
+    "total_shards_count": 1,
+    "processing_instruction": "PROCESS_AS_SNAPSHOT",
+    "nonce": 202113041501
+  },
+  "products": [
+    {
+      "id": "product-1",
+      "title": {
+        "localized_texts": [
+          {
+            "language_code": "en",
+            "text": "Dans bike tour"
+          },
+          {
+            "language_code": "es",
+            "text": "Tour en bicicleta por Dans"
+          },
+          {
+            "language_code": "zh-HK",
+            "text": "丹斯自行車之旅"
+          }
+        ]
+      },
+      "description": {
+        "localized_texts": [
+          {
+            "language_code": "en",
+            "text": "<p>See Sydney from a different perspective on a guided bike tour. Our experienced guides will take you on a scenic ride around the city...<p>"
+          },
+          {
+            "language_code": "es",
+            "text": "<p>Vea Sydney desde una perspectiva diferente en una visita guiada en bicicleta. Nuestros guías experimentados lo llevarán en un paseo panorámico por la ciudad....</p>"
+          },
+          {
+            "language_code": "zh-HK",
+            "text": "<p>一個非常有趣的自行車之旅.</p>"
+          }
+        ]
+      },
+      "rating": {
+        "average_value": 4.6,
+        "rating_count": 192
+      },
+      "product_features": [
+        {
+          "feature_type": "TEXT_FEATURE_INCLUSION",
+          "value": {
+            "localized_texts": [
+              {
+                "language_code": "en",
+                "text": "Bike rental including helmet."
+              },
+              {
+                "language_code 可`": "es",
+                "text": "Alquiler de bicicletas con casco incluido."
+              },
+              {
+                "language_code": "zh-HK",
+                "text": "自行车出租，包括头盔.</p>"
+              }
+            ]
+          }
+        },
+        {
+          "feature_type": "TEXT_FEATURE_INCLUSION",
+          "value": {
+            "localized_texts": [
+              {
+                "language_code": "en",
+                "text": "Bottled water."
+              },
+              {
+                "language_code 可`": "es",
+                "text": "Agua embotellada."
+              },
+              {
+                "language_code": "zh-HK",
+                "text": "瓶装水."
+              }
+            ]
+          }
+        },
+        {
+          "feature_type": "TEXT_FEATURE_HIGHLIGHT",
+          "value": {
+            "localized_texts": [
+              {
+                "language_code": "en",
+                "text": "See the Sydney Opera House and the Harbour Bridge up close."
+              },
+              {
+                "language_code": "es",
+                "text": "Vea de cerca la Ópera de Sídney y el puente del puerto."
+              },
+              {
+                "language_code": "zh-HK",
+                "text": "近距离观赏悉尼歌剧院和海港大桥."
+              }
+            ]
+          }
+        },
+        {
+          "feature_type": "TEXT_FEATURE_MUST_KNOW",
+          "value": {
+            "localized_texts": [
+              {
+                "language_code": "en",
+                "text": "This tour is suitable for children aged 10 and up."
+              },
+              {
+                "language_code": "es",
+                "text": "Este tour es adecuado para niños de 10 años en adelante."
+              },
+              {
+                "language_code": "zh-HK",
+                "text": "此行程适合 10 岁及以上儿童.</p>"
+              }
+            ]
+          }
+        }
+      ],
+      "options": [
+        {
+          "id": "option-1",
+          "title": {
+            "localized_texts": [
+              {
+                "language_code": "en",
+                "text": "Sunset tour"
+              },
+              {
+                "language_code": "es",
+                "text": "Tour al atardecer"
+              },
+              {
+                "language_code": "zh-HK",
+                "text": "日落之旅"
+              }
+            ]
+          },
+          "landing_page": {
+            "url": "https://www.danstour.com/bike-tours/?product-id={product_id}&option_id={option_id}&source={src}&language={lang}&currency={currency}"
+          },
+          "landing_page_list_view": {
+            "url": "https://www.danstour.com/bike-tours/?source={src}&language={lang}&currency={currency}"
+          },
+          "duration_sec": 10800,
+          "cancellation_policy": {
+            "refund_conditions": [
+              {
+                "min_duration_before_start_time_sec": 86400,
+                "refund_percent": 100
+              }
+            ]
+          },
+          "option_categories": [
+            {
+              "label": "sports"
+            },
+            {
+              "label": "bike-tours"
+            }
+          ],
+          "related_locations": [
+            {
+              "location": {
+                "location": {
+                  "place_id": "ChIJ3S-JXmauEmsRUcIaWtf4MzE"
+                }
+              },
+              "relation_type": "RELATION_TYPE_RELATED_NO_ADMISSION"
+            },
+            {
+              "location": {
+                "location": {
+                  "place_info": {
+                    "name": "Mutitjulu Waterhole",
+                    "coordinates": {
+                      "latitude": -25.35103192003537,
+                      "longitude": 131.03269662583725
+                    }
+                  }
+                }
+              },
+              "relation_type": "RELATION_TYPE_RELATED_NO_ADMISSION"
+            }
+          ],
+          "price_options": [
+            {
+              "id": "option-1-adult",
+              "title": "Adult (14+)",
+              "price": {
+                "currency_code": "EUR",
+                "units": 20
+              },
+              "fees_and_taxes": {
+                "per_ticket_fee": {
+                  "currency_code": "EUR",
+                  "units": 1
+                },
+                "per_ticket_tax": {
+                  "currency_code": "EUR",
+                  "units": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "id": "option-2",
+          "title": {
+            "localized_texts": [
+              {
+                "language_code": "en",
+                "text": "Sunrise tour"
+              },
+              {
+                "language_code": "es",
+                "text": "Tour al amanecer"
+              },
+              {
+                "language_code": "zh-HK",
+                "text": "日出之旅"
+              }
+            ]
+          },
+          "landing_page": {
+            "url": "https://www.danstour.com/bike-tours/?product-id={product_id}&option_id={option_id}&source={src}&language={lang}&currency={currency}"
+          },
+          "landing_page_list_view": {
+            "url": "https://www.danstour.com/bike-tours/?source={src}&language={lang}&currency={currency}"
+          },
+          "duration_sec": 10800,
+          "cancellation_policy": {
+            "refund_conditions": [
+              {
+                "min_duration_before_start_time_sec": 86400,
+                "refund_percent": 100
+              }
+            ]
+          },
+          "option_categories": [
+            {
+              "label": "sports"
+            },
+            {
+              "label": "bike-tours"
+            }
+          ],
+          "related_locations": [
+            {
+              "location": {
+                "location": {
+                  "place_id": "ChIJ3S-JXmauEmsRUcIaWtf4MzE"
+                }
+              },
+              "relation_type": "RELATION_TYPE_RELATED_NO_ADMISSION"
+            }
+          ],
+          "price_options": [
+            {
+              "id": "option-2-adult",
+              "title": "Adult (14+)",
+              "price": {
+                "currency_code": "EUR",
+                "units": 20,
+                "nanos": 0
+              }
+            }
+          ],
+          "meeting_point": {
+            "location": {
+              "place_id": "ChIJ3S-JXmauEmsRUcIaWtf4MzE"
+            },
+            "description": {
+              "localized_texts": [
+                {
+                  "language_code": "en",
+                  "text": "Sunrise tour"
+                },
+                {
+                  "language_code": "es",
+                  "text": "Tour al amanecer"
+                },
+                {
+                  "language_code": "zh-HK",
+                  "text": "日出之旅"
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "related_media": [
+        {
+          "url": "http://www.danstour.com/photo1.jpg",
+          "type": "MEDIA_TYPE_PHOTO"
+        },
+        {
+          "url": "http://www.danstour.com/photo2.jpg",
+          "type": "MEDIA_TYPE_PHOTO",
+          "attribution": {
+            "localized_texts": [
+              {
+                "language_code": "en",
+                "text": "Dans Photos"
+              }
+            ]
+          }
+        }
+      ],
+      "operator": {
+        "google_business_profile_name": {
+          "localized_texts": [
+            {
+              "language_code": "en",
+              "text": "Dans Bikes"
+            }
+          ]
+        },
+        "locations": [{
+          "location": {
+            "place_info": {
+              "name": "Dans Bikes",
+              "phone_number": "+61298765432",
+              "website_url": "www.dansbikes.com",
+              "unstructured_address": "123 NY st, Paris, France"
+            }
+          }}]
+      },
+      "inventory_type": "INVENTORY_TYPE_DEFAULT",
+      "confirmation_type": "CONFIRMATION_TYPE_INSTANT",
+      "fulfillment_type": {
+        "mobile": true,
+        "print_at_home": false,
+        "pickup": false
+      }
+    }
+  ]
+}

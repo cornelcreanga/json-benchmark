@@ -1,5 +1,9 @@
 package org.simdjson;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.dataformat.smile.SmileFactory;
+import com.fasterxml.jackson.dataformat.smile.SmileGenerator;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.BenchmarkMode;
 import org.openjdk.jmh.annotations.Level;
@@ -16,34 +20,61 @@ import java.util.concurrent.TimeUnit;
 
 import static org.simdjson.SimdJsonPaddingUtil.padded;
 
-//@State(Scope.Benchmark)
-//@BenchmarkMode(Mode.Throughput)
-//@OutputTimeUnit(TimeUnit.SECONDS)
+@State(Scope.Benchmark)
+@BenchmarkMode(Mode.Throughput)
+@OutputTimeUnit(TimeUnit.SECONDS)
 public class ParseBenchmark {
 
-//    @Param({"/twitter.json"})
-//    String fileName;
-//
-//    private final SimdJsonParser simdJsonParser = new SimdJsonParser();
-//
-//    private byte[] buffer;
-//    private byte[] bufferPadded;
-//
-//    @Setup(Level.Trial)
-//    public void setup() throws IOException {
-//        try (InputStream is = ParseBenchmark.class.getResourceAsStream(fileName)) {
-//            buffer = is.readAllBytes();
-//            bufferPadded = padded(buffer);
-//        }
-//    }
-//
-//    @Benchmark
-//    public JsonValue simdjson() {
-//        return simdJsonParser.parse(buffer, buffer.length);
-//    }
-//
-//    @Benchmark
-//    public JsonValue simdjsonPadded() {
-//        return simdJsonParser.parse(bufferPadded, buffer.length);
-//    }
+    @Param({"/twitter.json"})
+    String fileName;
+
+    private final SimdJsonParser simdJsonParser = new SimdJsonParser();
+    private ObjectMapper objectMapper;
+    private ObjectMapper smileMapper;
+    private byte[] buffer;
+    private byte[] bufferPadded;
+
+    private byte[] bufferLz4;
+    private byte[] bufferSmileLz4;
+    private byte[] bufferSmile;
+
+
+    @Setup(Level.Trial)
+    public void setup() throws Exception {
+        try (InputStream is = ParseBenchmark.class.getResourceAsStream(fileName)) {
+            buffer = is.readAllBytes();
+            bufferPadded = padded(buffer);
+
+            bufferSmile = JsonUtil.jsonToSmile(buffer);
+            bufferLz4 = Lz4Util.compress(buffer);
+            bufferSmileLz4 = Lz4Util.compress(bufferLz4);
+
+            objectMapper = new ObjectMapper();
+
+            SmileFactory smileFactory = new SmileFactory();
+            smileFactory.configure(SmileGenerator.Feature.ENCODE_BINARY_AS_7BIT, false);
+            smileFactory.configure(SmileGenerator.Feature.CHECK_SHARED_NAMES, true);
+            smileFactory.configure(SmileGenerator.Feature.CHECK_SHARED_STRING_VALUES, true);
+            smileMapper = new ObjectMapper(smileFactory);
+        }
+    }
+
+    public JsonNode jacksonJson() throws IOException {
+        return objectMapper.readTree(buffer, 0, buffer.length);
+    }
+
+    public JsonNode jacksonSmile() throws IOException {
+        return objectMapper.readTree(buffer, 0, bufferSmile.length);
+    }
+
+
+    @Benchmark
+    public JsonValue simdjson() {
+        return simdJsonParser.parse(buffer, buffer.length);
+    }
+
+    @Benchmark
+    public JsonValue simdjsonPadded() {
+        return simdJsonParser.parse(bufferPadded, buffer.length);
+    }
 }

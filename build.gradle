@@ -43,9 +43,15 @@ ext {
 dependencies {
 
     jmhImplementation("org.lz4:lz4-java:1.8.0")
+    jmhImplementation("com.github.luben:zstd-jni:1.5.5-11")
+
     jmhImplementation("org.simdjson:simdjson-java:0.1.0")
     jmhImplementation("com.fasterxml.jackson.core:jackson-databind:2.16.1")
     jmhImplementation("com.fasterxml.jackson.dataformat:jackson-dataformat-smile:2.16.1")
+    jmhImplementation("com.fasterxml.jackson.dataformat:jackson-dataformat-cbor:2.16.1")
+    jmhImplementation("com.fasterxml.jackson.dataformat:jackson-dataformat-ion:2.16.1")
+
+    jmhImplementation("org.msgpack:jackson-dataformat-msgpack:0.9.7")
 
     jmhImplementation("com.google.guava:guava:32.1.2-jre")
 }
