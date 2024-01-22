@@ -25,7 +25,7 @@ import static org.simdjson.SimdJsonPaddingUtil.padded;
 @OutputTimeUnit(TimeUnit.SECONDS)
 public class ParseBenchmark {
 
-    @Param({"/twitter.json"})
+    @Param({"/github-events.json"})
     String fileName;
 
     private final SimdJsonParser simdJsonParser = new SimdJsonParser();
@@ -58,15 +58,14 @@ public class ParseBenchmark {
             smileMapper = new ObjectMapper(smileFactory);
         }
     }
-
+    @Benchmark
     public JsonNode jacksonJson() throws IOException {
         return objectMapper.readTree(buffer, 0, buffer.length);
     }
-
-    public JsonNode jacksonSmile() throws IOException {
-        return objectMapper.readTree(buffer, 0, bufferSmile.length);
+    @Benchmark
+    public JsonNode jacksonSmile() throws Exception {
+        return smileMapper.readTree(bufferSmile, 0, bufferSmile.length);
     }
-
 
     @Benchmark
     public JsonValue simdjson() {
