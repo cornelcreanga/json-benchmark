@@ -45,7 +45,7 @@ dependencies {
     jmhImplementation("org.lz4:lz4-java:1.8.0")
     jmhImplementation("com.github.luben:zstd-jni:1.5.5-11")
 
-    jmhImplementation("org.simdjson:simdjson-java:0.1.0")
+    jmhImplementation("org.simdjson:simdjson-java:0.2.0")
     jmhImplementation("com.fasterxml.jackson.core:jackson-databind:2.16.1")
     jmhImplementation("com.fasterxml.jackson.dataformat:jackson-dataformat-smile:2.16.1")
     jmhImplementation("com.fasterxml.jackson.dataformat:jackson-dataformat-cbor:2.16.1")

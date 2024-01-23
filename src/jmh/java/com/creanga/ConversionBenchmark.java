@@ -1,4 +1,4 @@
-package org.simdjson;
+package com.creanga;
 
 
 import org.openjdk.jmh.annotations.*;

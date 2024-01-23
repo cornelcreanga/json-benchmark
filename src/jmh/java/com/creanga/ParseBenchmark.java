@@ -1,4 +1,4 @@
-package org.simdjson;
+package com.creanga;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -13,19 +13,21 @@ import org.openjdk.jmh.annotations.Param;
 import org.openjdk.jmh.annotations.Scope;
 import org.openjdk.jmh.annotations.Setup;
 import org.openjdk.jmh.annotations.State;
+import org.simdjson.JsonValue;
+import org.simdjson.SimdJsonParser;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.concurrent.TimeUnit;
 
-import static org.simdjson.SimdJsonPaddingUtil.padded;
+import static com.creanga.SimdJsonPaddingUtil.padded;
 
 @State(Scope.Benchmark)
 @BenchmarkMode(Mode.Throughput)
 @OutputTimeUnit(TimeUnit.SECONDS)
 public class ParseBenchmark {
 
-    @Param({"/github-events.json"})
+    @Param({"/gsoc-2018.json"})
     String fileName;
 
     private final SimdJsonParser simdJsonParser = new SimdJsonParser();

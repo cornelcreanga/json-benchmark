@@ -1,4 +1,4 @@
-package org.simdjson;
+package com.creanga;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;

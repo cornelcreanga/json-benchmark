@@ -1,4 +1,4 @@
-package org.simdjson;
+package com.creanga;
 
 import java.util.Arrays;
 

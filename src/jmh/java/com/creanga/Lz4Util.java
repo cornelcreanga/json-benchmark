@@ -1,4 +1,4 @@
-package org.simdjson;
+package com.creanga;
 
 import com.google.common.io.ByteStreams;
 import net.jpountz.lz4.*;
