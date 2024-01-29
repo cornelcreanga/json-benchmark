@@ -77,8 +77,8 @@ javadoc.options {
 
 jmh {
     fork = 1
-    warmupIterations = 3
-    iterations = 5
+    warmupIterations = 2
+    iterations = 2
     jvmArgsPrepend = [
             '--add-modules=jdk.incubator.vector'
     ]

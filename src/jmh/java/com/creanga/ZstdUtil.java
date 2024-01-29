@@ -56,6 +56,8 @@ public class ZstdUtil {
         System.out.println(json.length);
         byte[] c = ZstdUtil.compress(json);
         System.out.println(c.length);
+        System.out.println(ZstdUtil.compress(json, 10).length);
+        System.out.println(ZstdUtil.compress(json, 20).length);
         byte[] d = ZstdUtil.decompress(c, json.length);
         System.out.println(d.length);
     }
