@@ -26,7 +26,7 @@ import static com.creanga.SimdJsonPaddingUtil.padded;
 @State(Scope.Benchmark)
 @BenchmarkMode(Mode.Throughput)
 @OutputTimeUnit(TimeUnit.SECONDS)
-public class ParseAndSelectBenchmark {
+public class ParseAndSelectTwitterBenchmark {
 
     private SimdJsonParser simdJsonParser;
     private ObjectMapper objectMapper;

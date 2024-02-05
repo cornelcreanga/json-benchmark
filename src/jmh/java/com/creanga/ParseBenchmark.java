@@ -33,12 +33,15 @@ public class ParseBenchmark {
     private final SimdJsonParser simdJsonParser = new SimdJsonParser();
     private ObjectMapper objectMapper;
     private ObjectMapper smileMapper;
-    private byte[] buffer;
     private byte[] bufferPadded;
 
+    private byte[] buffer;
     private byte[] bufferLz4;
-    private byte[] bufferSmileLz4;
+    private byte[] bufferZstd;
+
     private byte[] bufferSmile;
+    private byte[] bufferSmileLz4;
+    private byte[] bufferSmileZstd;
 
 
     @Setup(Level.Trial)
@@ -46,10 +49,12 @@ public class ParseBenchmark {
         try (InputStream is = ParseBenchmark.class.getResourceAsStream(fileName)) {
             buffer = is.readAllBytes();
             bufferPadded = padded(buffer);
+            bufferLz4 = Lz4Util.compress(buffer);
+            bufferZstd = ZstdUtil.compress(buffer);
 
             bufferSmile = JsonUtil.jsonToSmile(buffer);
-            bufferLz4 = Lz4Util.compress(buffer);
-            bufferSmileLz4 = Lz4Util.compress(bufferLz4);
+            bufferSmileLz4 = Lz4Util.compress(bufferSmile);
+            bufferSmileZstd = ZstdUtil.compress(bufferSmile);
 
             objectMapper = new ObjectMapper();
 
@@ -65,8 +70,28 @@ public class ParseBenchmark {
         return objectMapper.readTree(buffer, 0, buffer.length);
     }
     @Benchmark
+    public JsonNode jacksonJsonLz4() throws IOException {
+        byte[] decompressed = Lz4Util.decompress(bufferLz4, buffer.length);
+        return objectMapper.readTree(decompressed, 0, buffer.length);
+    }
+    @Benchmark
+    public JsonNode jacksonJsonZstd() throws IOException {
+        byte[] decompressed = ZstdUtil.decompress(bufferZstd, buffer.length);
+        return objectMapper.readTree(decompressed, 0, buffer.length);
+    }
+    @Benchmark
     public JsonNode jacksonSmile() throws Exception {
         return smileMapper.readTree(bufferSmile, 0, bufferSmile.length);
+    }
+    @Benchmark
+    public JsonNode jacksonSmileLz4() throws Exception {
+        byte[] decompressed = Lz4Util.decompress(bufferSmileLz4, bufferSmileLz4.length);
+        return smileMapper.readTree(decompressed, 0, bufferSmile.length);
+    }
+    @Benchmark
+    public JsonNode jacksonSmileZstd() throws Exception {
+        byte[] decompressed = ZstdUtil.decompress(bufferSmileZstd, buffer.length);
+        return smileMapper.readTree(decompressed, 0, bufferSmile.length);
     }
 
     @Benchmark
@@ -75,7 +100,19 @@ public class ParseBenchmark {
     }
 
     @Benchmark
-    public JsonValue simdjsonPadded() {
-        return simdJsonParser.parse(bufferPadded, buffer.length);
+    public JsonValue simdjsonLz4() {
+        byte[] decompressed = Lz4Util.decompress(bufferLz4, buffer.length);
+        return simdJsonParser.parse(decompressed, buffer.length);
     }
+
+    @Benchmark
+    public JsonValue simdjsonZstd() {
+        byte[] decompressed = ZstdUtil.decompress(bufferZstd, buffer.length);
+        return simdJsonParser.parse(decompressed, buffer.length);
+    }
+
+//    @Benchmark
+//    public JsonValue simdjsonPadded() {
+//        return simdJsonParser.parse(bufferPadded, buffer.length);
+//    }
 }

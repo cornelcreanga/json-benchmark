@@ -1,0 +1,11 @@
+Benchmark                                                                              Mode  Cnt     Score    Error  Units
+ParseAndSelectTwitterBenchmark.countUniqueUsersWithDefaultProfile_jackson             thrpt    5   612.751 ±  1.788  ops/s
+ParseAndSelectTwitterBenchmark.countUniqueUsersWithDefaultProfile_jackson_lz4         thrpt    5   563.480 ±  3.523  ops/s
+ParseAndSelectTwitterBenchmark.countUniqueUsersWithDefaultProfile_jackson_smile       thrpt    5  1098.930 ±  1.920  ops/s
+ParseAndSelectTwitterBenchmark.countUniqueUsersWithDefaultProfile_jackson_smile_lz4   thrpt    5  1051.514 ±  7.656  ops/s
+ParseAndSelectTwitterBenchmark.countUniqueUsersWithDefaultProfile_jackson_smile_zstd  thrpt    5   956.141 ±  4.131  ops/s
+ParseAndSelectTwitterBenchmark.countUniqueUsersWithDefaultProfile_jackson_zstd        thrpt    5   541.667 ±  1.671  ops/s
+ParseAndSelectTwitterBenchmark.countUniqueUsersWithDefaultProfile_simdjson            thrpt    5  1864.878 ±  2.911  ops/s
+ParseAndSelectTwitterBenchmark.countUniqueUsersWithDefaultProfile_simdjsonPadded      thrpt    5  1916.320 ± 18.547  ops/s
+ParseAndSelectTwitterBenchmark.countUniqueUsersWithDefaultProfile_simdjson_lz4        thrpt    5  1502.816 ±  5.971  ops/s
+ParseAndSelectTwitterBenchmark.countUniqueUsersWithDefaultProfile_simdjson_zstd       thrpt    5  1262.563 ±  0.977  ops/s

@@ -41,8 +41,8 @@ public class ZstdUtil {
     }
 
 
-    public static byte[] decompress(byte[] input, int maxLen) {
-        byte[] decompress = new byte[maxLen];
+    public static byte[] decompress(byte[] input, int decompressedLength) {
+        byte[] decompress = new byte[decompressedLength];
         try {
             long len = Zstd.decompress(decompress,input);
             return Arrays.copyOfRange(decompress, 0, (int)len);
