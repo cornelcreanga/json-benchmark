@@ -20,6 +20,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.concurrent.TimeUnit;
 
+import static com.creanga.JsonUtil.convertJsonLinesToArray;
 import static com.creanga.SimdJsonPaddingUtil.padded;
 
 @State(Scope.Benchmark)
@@ -27,7 +28,8 @@ import static com.creanga.SimdJsonPaddingUtil.padded;
 @OutputTimeUnit(TimeUnit.SECONDS)
 public class ParseBenchmark {
 
-    @Param({"/gsoc-2018.json"})
+    //@Param({"/gsoc-2018.json"})
+    @Param({"/sampleArray.json"})
     String fileName;
 
     private final SimdJsonParser simdJsonParser = new SimdJsonParser();
@@ -53,6 +55,7 @@ public class ParseBenchmark {
             bufferZstd = ZstdUtil.compress(buffer);
 
             bufferSmile = JsonUtil.jsonToSmile(buffer);
+//            bufferSmile = JsonUtil.jsonToSmile(convertJsonLinesToArray(buffer));
             bufferSmileLz4 = Lz4Util.compress(bufferSmile);
             bufferSmileZstd = ZstdUtil.compress(bufferSmile);
 
@@ -85,12 +88,12 @@ public class ParseBenchmark {
     }
     @Benchmark
     public JsonNode jacksonSmileLz4() throws Exception {
-        byte[] decompressed = Lz4Util.decompress(bufferSmileLz4, bufferSmileLz4.length);
+        byte[] decompressed = Lz4Util.decompress(bufferSmileLz4, bufferSmile.length);
         return smileMapper.readTree(decompressed, 0, bufferSmile.length);
     }
     @Benchmark
     public JsonNode jacksonSmileZstd() throws Exception {
-        byte[] decompressed = ZstdUtil.decompress(bufferSmileZstd, buffer.length);
+        byte[] decompressed = ZstdUtil.decompress(bufferSmileZstd, bufferSmile.length);
         return smileMapper.readTree(decompressed, 0, bufferSmile.length);
     }
 

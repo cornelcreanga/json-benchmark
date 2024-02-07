@@ -1,7 +1,10 @@
 package com.creanga;
 
+import com.fasterxml.jackson.core.JsonFactory;
+import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.dataformat.cbor.databind.CBORMapper;
 import com.fasterxml.jackson.dataformat.ion.IonObjectMapper;
 import com.fasterxml.jackson.dataformat.smile.SmileFactory;
@@ -32,6 +35,11 @@ public class JsonUtil {
 
     }
 
+    public static byte[] jsonToSmile(JsonNode node) throws Exception{
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        smileMapper.writeValue(baos, node);
+        return baos.toByteArray();
+    }
     public static byte[] jsonToSmile(byte[] input) throws Exception{
         JsonNode node = jsonMapper.readTree(input);
         ByteArrayOutputStream baos = new ByteArrayOutputStream(input.length);
@@ -59,13 +67,30 @@ public class JsonUtil {
 
 
     public static void main(String[] args) throws Exception {
-        byte[] json = ByteStreams.toByteArray(new FileInputStream("/home/cornel/projects/json-benchmark/src/jmh/resources/twitter.json"));
-        System.out.println(json.length);
-        System.out.println(jsonToSmile(json).length);
-        System.out.println(jsonToIon(json).length);
-        System.out.println(jsonToCbor(json).length);
-        System.out.println(jsonToMessagePack(json).length);
+//        byte[] json = ByteStreams.toByteArray(new FileInputStream("/home/cornel/projects/json-benchmark/src/jmh/resources/twitter.json"));
+//        System.out.println(json.length);
+//        System.out.println(jsonToSmile(json).length);
+//        System.out.println(jsonToIon(json).length);
+//        System.out.println(jsonToCbor(json).length);
+//        System.out.println(jsonToMessagePack(json).length);
 
+        byte[] json = ByteStreams.toByteArray(new FileInputStream("/Users/ccreanga/projects/json-benchmark/src/jmh/resources/sample.json"));
+        ArrayNode arrayNode = JsonUtil.convertJsonLinesToArray(json);
+        jsonMapper.writeValue(new FileOutputStream("/Users/ccreanga/projects/json-benchmark/src/jmh/resources/sampleArray.json"), arrayNode);
+    }
+
+    public static ArrayNode convertJsonLinesToArray(byte[] json) throws Exception {
+        ArrayNode array = jsonMapper.createArrayNode();
+        JsonFactory jf = new JsonFactory();
+        JsonParser jp = jf.createParser(json);
+        jp.setCodec(jsonMapper);
+        jp.nextToken();
+        while (jp.hasCurrentToken()) {
+            JsonNode token = jp.readValueAsTree();
+            jp.nextToken();
+            array.add(token);
+        }
+        return array;
     }
 
 }
